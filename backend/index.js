@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const router = require("./controller/register");
+const scheduler = require("./scheduler");
 const app = express();
 dotenv.config();
 
@@ -13,6 +15,8 @@ async function connectToDatabase() {
   }
 }
 connectToDatabase();
-
+//Middleware and Routers
+app.use(express.json());
+app.use("/register", router);
 //Server listening on port
-app.listen(3000, () => console.log("Server is connected successfully"));
+app.listen(3007, () => console.log("Server is connected successfully"));

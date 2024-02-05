@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../models/details");
+const validateRegistration = require("../middleware/joischema");
 
 //Registration Routes
 router.post("/register", validateRegistration, async (req, res) => {
@@ -23,8 +24,8 @@ router.post("/register", validateRegistration, async (req, res) => {
 
     res.status(201).send(`${req.body.username} registered successfully`);
   } catch (error) {
-    console.error("Error registering user:" + error.message);
-    res.status(500).send("Internal Serval Error");
+    winston.error(`Error registering user: + ${error.message}`);
+    res.status(500).send(`{ error: "Registration failed"}`);
   }
 });
 

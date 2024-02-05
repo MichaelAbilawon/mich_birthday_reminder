@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     unique: true, //this is to make sure that the email id of a person is always
     //unique in our database
   },
-  dateofbirth: {
+  dateOfBirth: {
     required: true,
     type: Date,
   },
