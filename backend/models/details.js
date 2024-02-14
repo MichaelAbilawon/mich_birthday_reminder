@@ -2,18 +2,21 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   username: {
-    type: String,
     required: true,
+    type: String,
   },
   email: {
     required: true,
     type: String,
-    unique: true, //this is to make sure that the email id of a person is always
-    //unique in our database
+    unique: true,
   },
   dateOfBirth: {
     required: true,
-    type: Date,
+    type: String, // Store as string to match frontend format
+    set: function (value) {
+      // Custom setter to ensure date format matches frontend
+      return new Date(value).toISOString().split("T")[0];
+    },
   },
   dateSelected: {
     type: String,

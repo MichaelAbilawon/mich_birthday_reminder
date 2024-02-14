@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const router = require("./controller/register");
+const path = require("path");
+const winston = require("winston");
 const scheduler = require("./scheduler");
 const app = express();
 dotenv.config();
@@ -17,6 +19,24 @@ async function connectToDatabase() {
 connectToDatabase();
 //Middleware and Routers
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/register", router);
+app.set(express.static("public"));
+app.set("view engine", "ejs");
+
+app.set("views", path.join(__dirname, "views")); //directory for views
+app.get("/", (req, res) => {
+  res.render("register");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  // Log the error using Winston
+  winston.error(`Unhandled Error: ${err.message}`, err);
+  // Send an error response to the client
+  res.status(500).send({ error: "Something went wrong" });
+});
+
 //Server listening on port
 app.listen(3007, () => console.log("Server is connected successfully"));

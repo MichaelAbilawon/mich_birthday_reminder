@@ -1,0 +1,9 @@
+{"level":"error","message":"Error registering user: User validation failed: username: Path `username` is required., email: Path `email` is required., dateOfBirth: Path `dateOfBirth` is required."}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"username\" is required"}
+{"level":"error","message":"Error registering user: \"dateOfBirth\" is required"}
+{"level":"error","message":"Error registering user: \"dateOfBirth\" is required"}

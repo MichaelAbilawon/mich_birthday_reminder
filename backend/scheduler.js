@@ -1,19 +1,19 @@
 const cron = require("node-cron");
-const nodemailer = require("nodemailer");
+const mailgun = require("mailgun-js");
 const user = require("./models/details");
+const dotenv = require("dotenv");
+dotenv.config();
 
-// Set up the nodemailer transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
-  },
+// Initialize Mailgun with API key and domain
+const mg = mailgun({
+  apiKey: process.env.MAILGUN_API,
+  domain: process.env.MAILGUN_DOMAIN,
 });
 
 // Define a function to set up the cron job
 const scheduleJob = () =>
   new Promise((resolve, reject) => {
+    // Check if there are users in the database
     try {
       const job = cron.schedule("0 7 * * *", async () => {
         try {
@@ -27,18 +27,18 @@ const scheduleJob = () =>
 
           // Send birthday emails
           for (const user of upcomingBirthdays) {
-            const mailOptions = {
-              from: process.env.EMAIL,
+            const data = {
+              from: process.env.MAILGUN_EMAIL,
               to: user.email,
-              subject: "Birthday Wishes 🥳",
+              subject: "Birthday Wishes 🥳🎈",
               text: `Dear ${user.username}, \n\n Happy Birthday! I hope you have an amazing day filled with love and celebration!`,
             };
 
-            await transporter.sendMail(mailOptions);
-            console.log("Birthday email sent to " + user.email);
+            await mg.messages().send(data);
+            console.log(`Birthday email sent to ${user.email}`);
           }
         } catch (error) {
-          console.error("Error in cron job:", error.message);
+          console.error("Error in cron job: " + error.message);
         }
       });
 
