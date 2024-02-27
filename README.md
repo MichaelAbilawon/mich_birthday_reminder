@@ -21,7 +21,7 @@ Tech stack:
 
 -Database: MongoDB
 
--Email: Nodemailer
+-Email: Maigun
 
 -Scheduler: Cron Job
 
@@ -36,11 +36,3 @@ Getting Started:
 -Set up the cron job.
 
 -Run the app!
-
-Customization:
-
--Design unique email templates for different occasions.
-
--Integrate with social media for wider reach.
-
--Offer customizable notification options.
