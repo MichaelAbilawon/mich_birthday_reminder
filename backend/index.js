@@ -30,13 +30,5 @@ app.get("/", (req, res) => {
   res.render("register");
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  // Log the error using Winston
-  winston.error(`Unhandled Error: ${err.message}`, err);
-  // Send an error response to the client
-  res.status(500).send({ error: "Something went wrong" });
-});
-
 //Server listening on port
 app.listen(3007, () => console.log("Server is connected successfully"));
