@@ -15,7 +15,7 @@ Features:
 
 Tech stack:
 
--Frontend: HTML, CSS, JavaScript
+view: ejs
 
 -Backend: Node.js
 
