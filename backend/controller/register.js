@@ -13,7 +13,7 @@ router.post("/register", validateRegistration, async (req, res) => {
   try {
     const isExisting = await user.findOne({ email: req.body.email });
     if (isExisting) {
-      return res.status(400).json({ error: "Email has already been used." });
+      return res.render("error");
     }
     const { username, email, dateOfBirth } = req.body;
     // Create a new user
